@@ -11,12 +11,18 @@ const App = () => {
       <header>
         <Toolbar />
       </header>
-      <main className='container'>
+      <main className='container flex-grow-1'>
         <Routes>
           <Route path='/' element={<Quotes />} />
           <Route path='/add-quote' element={<InteractionForm />} />
+          <Route path='/quotes/:id/edit' element={<InteractionForm />} />
         </Routes>
       </main>
+      <footer className="bg-success">
+        <div className="container text-center">
+          <p className='my-4 text-light'>Made by Denis Khrunev student Attractor school 2024</p>
+        </div>
+      </footer>
     </>
   );
 };

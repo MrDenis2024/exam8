@@ -3,14 +3,15 @@ import {Quote} from '../../types';
 
 interface Props {
   quote: Quote;
+  id: string | undefined;
   onFormSubmit: React.ChangeEventHandler<HTMLFormElement>;
   onFieldChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>;
 }
 
-const QuoteForm: React.FC<Props> = ({quote, onFormSubmit, onFieldChange}) => {
+const QuoteForm: React.FC<Props> = ({quote, id, onFormSubmit, onFieldChange}) => {
   return (
-    <div className="mt-4 border border-black rounded p-5">
-      <h2>Submit new quote</h2>
+    <div className="mt-4 border border-black rounded px-5 py-3">
+      {id ? <h2>Edit a quote</h2> : <h2>Submit new quote</h2>}
       <form className="mt-4" onSubmit={onFormSubmit}>
         <div className="form-group">
           <label htmlFor="category">Category</label>
