@@ -3,10 +3,13 @@ import {ApiQuotes, QuoteMutation} from '../../types';
 import axiosApi from '../../axiosApi';
 import Spinner from '../../components/Spinner/Spinner';
 import Quote from '../../components/Quote/Quote';
+import CategoryNav from '../../components/CategoryNav/CategoryNav';
+import {useNavigate} from 'react-router-dom';
 
 const Quotes = () => {
   const [quotes, setQuotes] = useState<QuoteMutation[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchQuotes = useCallback( async () => {
     setLoading(true);
@@ -36,15 +39,24 @@ const Quotes = () => {
     void fetchQuotes();
   }, [fetchQuotes]);
 
+  const deleteQuote = async (quoteId: string) => {
+    try {
+      await axiosApi.delete(`/quotes/${quoteId}.json`);
+    } catch (e) {
+      console.error('Ошибка удаление поста');
+    } finally {
+      navigate('/');
+      void fetchQuotes();
+    }
+  };
+
   let postsList = (
     <div className='d-flex justify-content-between mt-5'>
-      <div>
-        Navigation
-      </div>
-      <div>
-        <h2>All</h2>
+      <CategoryNav />
+      <div className='col-6'>
+        {quotes.length > 0 ? <h2>All</h2> : <h2>No quotes</h2>}
         {quotes.map((quote) => (
-          <Quote key={quote.id} quote={quote}/>
+          <Quote key={quote.id} quote={quote} deleteQuote={() => deleteQuote(quote.id)} />
         ))}
       </div>
     </div>
