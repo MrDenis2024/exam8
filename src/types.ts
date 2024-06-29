@@ -3,3 +3,14 @@ export interface Quote {
   author: string,
   text: string,
 }
+
+export interface QuoteMutation {
+  id: string;
+  category: string,
+  author: string,
+  text: string,
+}
+
+export interface ApiQuotes {
+  [id: string]: Quote;
+}
