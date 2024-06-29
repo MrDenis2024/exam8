@@ -14,3 +14,8 @@ export interface QuoteMutation {
 export interface ApiQuotes {
   [id: string]: Quote;
 }
+
+export interface Category {
+  title: string,
+  id: string,
+}

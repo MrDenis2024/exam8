@@ -16,6 +16,7 @@ const App = () => {
           <Route path='/' element={<Quotes />} />
           <Route path='/add-quote' element={<InteractionForm />} />
           <Route path='/quotes/:id/edit' element={<InteractionForm />} />
+          <Route path='/quotes/:id' element={<Quotes />} />
         </Routes>
       </main>
       <footer className="bg-success">
